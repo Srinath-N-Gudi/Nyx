@@ -21,6 +21,13 @@ Perfect for anyone starting with OpenGL or building their own 2D/3D graphics eng
 
 ## 🚀 Getting Started
 
+*Note*: Only glad, glew can be used and Nyx requires either `<glad/glad.h>` or `<GL/glew.h>` to be included.
+To use glad, include `<glad/glad.h>` in your project's include path and define `NYX_USE_GLAD` pre-processor before using `Nyx`.
+To use glew, include `<GL/glew.h>` in your project's include path and define `NYX_USE_GLEW` pre-processor before using `Nyx`.
+
+
+
+
 1. **Clone the repo**
    ```bash
    git clone https://github.com/your-username/Nyx.git

@@ -1,4 +1,6 @@
-#include "VBO.h"	
+#include "VBO.h"
+
+
 
 namespace Nyx
 {

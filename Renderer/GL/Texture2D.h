@@ -1,6 +1,15 @@
 
 #pragma once
 
+#ifdef NYX_USE_GLAD
+#include <glad/glad.h>
+#elif defined(NYX_USE_GLEW)
+#include <GL/glew.h>
+#else
+#error "No OpenGL loader defined. Define NYX_USE_GLAD or NYX_USE_GLEW before including Nyx headers."
+#endif
+
+
 #include <iostream>
 
 namespace Nyx {
