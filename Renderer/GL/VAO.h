@@ -35,7 +35,8 @@ namespace Nyx
 			private:
 				GLuint m_VAO; 
 				VBO m_VBO;
-				
+				IBO m_IBO;
+				bool m_HIBO = false;
 			public:
 				VAO(const VBO& vbo);
 				~VAO();
@@ -43,8 +44,11 @@ namespace Nyx
 				void bind() const;
 				void unbind() const;
 				void setLayout(const std::vector<VertexAttribute>& layout);
+				IBO* getIBO();
 				void attachIndexBuffer(const IBO& ibo);
 				inline GLuint getID() { return m_VAO; }
+				inline bool hasIBO() { return m_HIBO;  }
+				inline VBO* getVBO() { return &m_VBO; }
 			
 			};
 

@@ -19,14 +19,17 @@ namespace Nyx{
         IBO();
         ~IBO();
 
-        void data(const void* data, GLsizeiptr size, GLenum usage = GL_STATIC_DRAW);
+        void data(const void* data, GLsizeiptr size,
+                   int dataTypeSize=sizeof(GLuint),
+                GLenum usage = GL_STATIC_DRAW);
         void bind() const;
         void unbind() const;
-
         GLuint getID() const { return m_ID; }
+        inline GLsizeiptr getCount() { return m_ICount;  }
 
     private:
         GLuint m_ID;
+        GLsizeiptr m_ICount = 0;
     };
 
 }

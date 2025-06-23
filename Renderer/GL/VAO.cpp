@@ -47,11 +47,17 @@ namespace Nyx
 			{
 				this->bind();
 				ibo.bind();   
-
+				m_IBO = ibo;
+				m_HIBO = true;
 				this->unbind(); 
 				ibo.unbind();
 			}
-
+			IBO* VAO::getIBO() {
+				if (m_HIBO)
+					return &m_IBO;
+				else
+					return nullptr;
+			}
 		}
 	}
 }

@@ -15,9 +15,10 @@ namespace Nyx
 			VBO::~VBO()
 			{
 			}
-			void VBO::data(const void* data, GLsizeiptr size, GLenum usage)
+			void VBO::data(const void* data, GLsizeiptr size,GLsizeiptr dataTypeSize , GLenum usage)
 			{
 				this->bind();
+				m_TCount = size / dataTypeSize;
 				glBufferData(GL_ARRAY_BUFFER, size, data, usage);
 				this->unbind();
 			}
