@@ -30,6 +30,8 @@ namespace Nyx
 
 
 		using NyxResizeCallback = std::function<void(int width, int height)>;
+		using NyxCursorPosCallback = std::function<void(double x, double y)>;
+
 		class  Window
 		{
 		private:
@@ -39,8 +41,11 @@ namespace Nyx
 			GLFWwindow* m_WindowObject;
 			Nyx::InputHandler m_InputHandler;
 			NyxResizeCallback m_ResizeCallback;
+			NyxCursorPosCallback m_CursorPosCallback;
 		private:
 			static void glfwResizeCallback(GLFWwindow* window, int width, int height);
+			static void glfwCursorPosCallback(GLFWwindow* window, double x, double y);
+
 			void init();
 
 		public:
@@ -54,6 +59,7 @@ namespace Nyx
 			inline bool windowClosed() const { return glfwWindowShouldClose(m_WindowObject) == 1 ; }
 			inline bool isMinimized() const { return glfwGetWindowAttrib(m_WindowObject, GLFW_ICONIFIED); }
 			inline bool isMaximized() const { return glfwGetWindowAttrib(m_WindowObject, GLFW_MAXIMIZED); }
+			inline void setCursorPos(double x, double y) { glfwSetCursorPos(m_WindowObject, x, y); }
 
 			
 
@@ -64,11 +70,13 @@ namespace Nyx
 
 			void update();
 
+
 			void setWindowTitle(const char* windowTile);
 			void setWidth (const int& width);
 			void setHeight(const int& height);
 			void setSize(const int& width, const int& height);
 			void setResizeCallback(const NyxResizeCallback& callback);
+			void setCursorPosCallback(const NyxCursorPosCallback& callback);
 			void getFramebufferSize(int& width, int& height) const;
 			Nyx::InputHandler& getInputHandler();
 

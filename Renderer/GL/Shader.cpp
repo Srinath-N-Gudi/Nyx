@@ -103,6 +103,7 @@ namespace Nyx {
                 glUniformMatrix4fv(getUniformLocation(name), 1, transpose ? GL_TRUE : GL_FALSE, matrix);
             }
 
+
         }
     }
 }

@@ -58,6 +58,12 @@ namespace Window  {
 			glfwSetWindowSizeCallback(m_WindowObject, Window::glfwResizeCallback);
 			glfwSetWindowUserPointer(m_WindowObject, this); // Required for callback context
 		}
+		void Window::setCursorPosCallback(const NyxCursorPosCallback& callback)
+		{
+			m_CursorPosCallback = callback;
+			glfwSetCursorPosCallback(m_WindowObject, Window::glfwCursorPosCallback);
+			glfwSetWindowUserPointer(m_WindowObject, this); // Required for callback context
+		}
 		void Window::glfwResizeCallback(GLFWwindow* window, int width, int height) {
 			auto* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
 			if (self) {
@@ -66,6 +72,14 @@ namespace Window  {
 
 				if (self->m_ResizeCallback) {
 					self->m_ResizeCallback(width, height);
+				}
+			}
+		}
+		void Window::glfwCursorPosCallback(GLFWwindow* window, double x, double y) {
+			auto* self = static_cast<Window*>(glfwGetWindowUserPointer(window));
+			if (self) {
+				if (self->m_CursorPosCallback) {
+					self->m_CursorPosCallback(x, y);
 				}
 			}
 		}
@@ -91,7 +105,7 @@ namespace Window  {
 			m_Height = height;
 			glfwSetWindowSize(m_WindowObject, m_Width, m_Height);
 		}
-		
+
 		void Window::maximize() {
 			glfwMaximizeWindow(m_WindowObject);
 		}
