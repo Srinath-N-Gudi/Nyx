@@ -30,7 +30,7 @@ To use glew, include `<GL/glew.h>` in your project's include path and define `NY
 
 1. **Clone the repo**
    ```bash
-   git clone https://github.com/your-username/Nyx.git
+   git clone https://github.com/Srinath-N-Gudi/Nyx.git
    ```
 
 2. **Add dependencies**
