@@ -25,6 +25,7 @@ namespace Nyx
 			public:
 				VBO();
 				~VBO();
+				
 				void bind() const;
 				void unbind() const;
 				void data(const void* data, GLsizeiptr size, GLsizeiptr dataTypeValue=sizeof(GL_FLOAT), GLenum usage = GL_STATIC_DRAW);

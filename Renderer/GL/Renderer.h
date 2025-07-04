@@ -17,12 +17,12 @@ namespace Nyx {
 
             class Renderer {
             public:
-                Renderer(VAO* vaoList, size_t vaoCount, GLenum drawMode);
+                Renderer(VAO** vaoList, size_t vaoCount, GLenum drawMode);
 
                 void draw();
 
             private:
-                VAO* m_VAOs;
+                VAO** m_VAOs;
                 size_t m_Count; // number of VAOs
                 GLenum m_DrawMode;
             };

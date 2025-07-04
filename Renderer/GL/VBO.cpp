@@ -14,6 +14,7 @@ namespace Nyx
 			}
 			VBO::~VBO()
 			{
+				glDeleteBuffers(1, &m_VBO);
 			}
 			void VBO::data(const void* data, GLsizeiptr size,GLsizeiptr dataTypeSize , GLenum usage)
 			{

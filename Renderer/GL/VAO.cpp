@@ -7,13 +7,14 @@ namespace Nyx
 	{
 		namespace GL
 		{
-			VAO::VAO(const VBO& vbo) :
+			VAO::VAO(VBO* vbo) :
 				m_VBO(vbo)
 			{
 				glGenVertexArrays(1, &m_VAO);
 			}
 			VAO::~VAO()
 			{
+				glDeleteVertexArrays(1, &m_VAO);
 			}
 			void VAO::bind() const
 			{
@@ -26,7 +27,7 @@ namespace Nyx
 			void VAO::setLayout(const std::vector<VertexAttribute>& layout)
 			{
 				this->bind(); 
-				m_VBO.bind();
+				m_VBO->bind();
 
 				for (const auto& attr : layout) {
 					glEnableVertexAttribArray(attr.index);
@@ -40,21 +41,21 @@ namespace Nyx
 					);
 				}
 
-				m_VBO.unbind();
+				m_VBO->unbind();
 				this->unbind();
 			}
-			void VAO::attachIndexBuffer(const IBO& ibo)
+			void VAO::attachIndexBuffer(IBO* ibo)
 			{
 				this->bind();
-				ibo.bind();   
+				ibo->bind();   
 				m_IBO = ibo;
 				m_HIBO = true;
 				this->unbind(); 
-				ibo.unbind();
+				ibo->unbind();
 			}
 			IBO* VAO::getIBO() {
 				if (m_HIBO)
-					return &m_IBO;
+					return m_IBO;
 				else
 					return nullptr;
 			}
