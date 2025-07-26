@@ -80,8 +80,8 @@ To get started with Nyx, follow these steps:
     A basic example demonstrating window creation and the main application loop:
 
     ```cpp
-    #include "Nyx/Window.h"
     #include <glad/glad.h> // Assuming GLAD is used
+    #include "Nyx/Window.h"
 
     int main()
     {
@@ -583,6 +583,8 @@ This example demonstrates how to use Nyx to create a window, set up vertex data,
 3.  **Texture Image**: Place a `container.jpg` image file in your project directory.
 
 ```cpp
+#include <glad/glad.h> // Assuming GLAD is used
+
 #include "Nyx/Window.h"
 #include "Nyx/InputHandler.h"
 #include "Nyx/Renderer/GL/VAO.h"
@@ -593,7 +595,6 @@ This example demonstrates how to use Nyx to create a window, set up vertex data,
 #include "Nyx/Renderer/GL/Renderer.h"
 #include "Nyx/Image/ImageLoader.h"
 
-#include <glad/glad.h> // Assuming GLAD is used
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
