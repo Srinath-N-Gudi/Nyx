@@ -586,7 +586,7 @@ This example demonstrates how to use Nyx to create a window, set up vertex data,
 #include <glad/glad.h> // Assuming GLAD is used
 
 #include "Nyx/Window.h"
-#include "Nyx/InputHandler.h"
+#include "Nyx/Input/InputHandler.h"
 #include "Nyx/Renderer/GL/VAO.h"
 #include "Nyx/Renderer/GL/VBO.h"
 #include "Nyx/Renderer/GL/IBO.h"
@@ -629,56 +629,46 @@ int main()
     };
 
     Nyx::Renderer::GL::VBO vbo;
-    vbo.data(vertices, sizeof(vertices), GL_STATIC_DRAW);
+    vbo.data(vertices, sizeof(vertices), sizeof(GL_FLOAT), GL_STATIC_DRAW);
 
     Nyx::Renderer::GL::IBO ibo;
-    ibo.data(indices, sizeof(indices), GL_STATIC_DRAW);
+    ibo.data(indices, sizeof(indices), sizeof(GL_FLOAT), GL_STATIC_DRAW);
 
     // 3. VAO Setup with Vertex Attributes
-    Nyx::Renderer::GL::VAO vao(vbo);
+    Nyx::Renderer::GL::VAO vao(&vbo);
     vao.bind();
 
-    std::vector<Nyx::Renderer::GL::VAO::VertexAttribute> layout = {
-        {0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0}, // Position attribute
-        {1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 3 * sizeof(float)}  // Texture coordinate attribute
-    };
-    vao.setLayout(layout);
-    vao.attachIndexBuffer(ibo);
+    vao.setLayout({
+        { 0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 0 }, // Position attribute
+        { 1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), 3 * sizeof(float) }
+        });// Texture coordinate attribute);
+    vao.attachIndexBuffer(&ibo);
 
     vao.unbind(); // Unbind VAO after setup
     vbo.unbind(); // Unbind VBO
     ibo.unbind(); // Unbind IBO
 
     // 4. Shader Loading and Compilation
-    Nyx::Renderer::GL::Shader shader("basic.vert", "basic.frag");
+    Nyx::Renderer::GL::Shader shader("<path_to_vertex_shader_from_your_exectutable>", "<path_to_fragment_shader_from_your_exectutable>");
 
     // 5. Texture Loading and Binding
     Nyx::Renderer::GL::Texture2D texture;
-    if (!Nyx::Image::Loader::LoadToTexture(texture, "container.jpg"))
-    {
-        std::cerr << "Failed to load texture!" << std::endl;
-        return -1;
-    }
+    Nyx::Image::Loader::LoadToTexture(texture, "<path_to_texture_from_your_exectutable>", 0);
+
     texture.unbind(); // Unbind texture after loading
 
     // 6. Renderer Usage to Draw the Scene
-    Nyx::Renderer::GL::VAO* vaos[] = {&vao};
+    Nyx::Renderer::GL::VAO* vaos[] = { &vao };
     Nyx::Renderer::GL::Renderer renderer(vaos, 1, GL_TRIANGLES);
 
     // Transformation matrices
-    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 model = glm::rotate(glm::mat4(1.0f), 45.0f ,glm::vec3(1.0f, 0.0f, 0.0f));
     glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -3.0f));
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)window.getWidth() / window.getHeight(), 0.1f, 100.0f);
 
     // Main application loop
     while (!window.windowClosed())
     {
-        // Input handling
-        if (window->isKeyPressed(GLFW_KEY_ESCAPE))
-        {
-            window.close(); // Custom method to set window should close
-        }
-
         // Render
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -692,7 +682,6 @@ int main()
         shader.setUniform1i("ourTexture", 0); // Tell shader which texture unit to use
 
         renderer.draw(); // Draw the VAO
-
         window.update();
     }
 
