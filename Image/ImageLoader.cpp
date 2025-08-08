@@ -3,9 +3,8 @@
 
 namespace Nyx {
     namespace Image
-    {
-        
-        bool Loader::LoadToTexture(Nyx::Renderer::GL::Texture2D& texture, const std::string& path, int textureUnit)
+    { 
+        bool Loader::LoadToTexture(Nyx::Renderer::GL::Texture2D& texture, const std::string& path)
         {
             
                 int width, height, channels;
@@ -15,7 +14,7 @@ namespace Nyx {
                     return false;
                 }
 
-                texture.bind(textureUnit);
+                texture.bind();
                 texture.setData(width, height, channels, data);
                 stbi_image_free(data);
                 return true;

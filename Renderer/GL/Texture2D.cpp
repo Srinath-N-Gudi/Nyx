@@ -6,7 +6,8 @@
 namespace Nyx {
     namespace Renderer {
         namespace GL {
-            Texture2D::Texture2D() {
+            Texture2D::Texture2D(unsigned int slot) {
+                m_Slot = slot;
                 glGenTextures(1, &m_TextureID);
             }
 
@@ -29,12 +30,13 @@ namespace Nyx {
                 glGenerateMipmap(GL_TEXTURE_2D);
             }
 
-            void Texture2D::bind(unsigned int slot) const {
-                glActiveTexture(GL_TEXTURE0 + slot);
+            void Texture2D::bind(){
+                glActiveTexture(GL_TEXTURE0 + m_Slot);
                 glBindTexture(GL_TEXTURE_2D, m_TextureID);
             }
 
             void Texture2D::unbind() const {
+                glActiveTexture(GL_TEXTURE0 + m_Slot);
                 glBindTexture(GL_TEXTURE_2D, 0);
             }
 

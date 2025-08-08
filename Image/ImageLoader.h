@@ -10,8 +10,8 @@ namespace Nyx {
         class Loader {
         public:
             static bool LoadToTexture(Nyx::Renderer::GL::Texture2D& texture,
-                                      const std::string& path,
-                                      int textureUnit = 0);
+                                      const std::string& path
+				);
         };
     }
 }

@@ -9,7 +9,7 @@
 #endif
 
 #include <functional> // for std::function
-
+#include <memory>
 #include "VAO.h"
 #include "IBO.h"
 
@@ -21,13 +21,11 @@ namespace Nyx {
             public:
                 using DrawCallback = std::function<void(int index, VAO* vao, void* userData, bool& skipDraw)>;
 
-                Renderer(VAO** vaoList, size_t vaoCount, GLenum drawMode);
+                Renderer(GLenum drawMode) ;
 
-                void draw(DrawCallback callback = nullptr, void* userData = nullptr);
-
+				void draw(VAO** vaos, size_t vaoCount, DrawCallback callback = nullptr, void* userData = nullptr);
+                void draw(std::shared_ptr<VAO>* vaos,size_t vaoCount, DrawCallback callback = nullptr, void* userData = nullptr);
             private:
-                VAO** m_VAOs;
-                size_t m_Count; // number of VAOs
                 GLenum m_DrawMode;
 
                 DrawCallback m_Callback;
