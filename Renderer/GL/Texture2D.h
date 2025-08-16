@@ -3,6 +3,7 @@
 
 #ifdef NYX_USE_GLAD
 #include <glad/glad.h>
+#include "../../NyxAPI.h"
 #elif defined(NYX_USE_GLEW)
 #include <GL/glew.h>
 #else
@@ -15,14 +16,14 @@
 namespace Nyx {
     namespace Renderer {
         namespace GL {
-            struct TextureParams {
+            struct NYX_API TextureParams {
                 GLint wrapS = GL_REPEAT;
                 GLint wrapT = GL_REPEAT;
                 GLint minFilter = GL_LINEAR_MIPMAP_LINEAR;
                 GLint magFilter = GL_LINEAR;
             };
 
-            class Texture2D {
+            class NYX_API Texture2D {
             public:
                 Texture2D(unsigned int slot=0);
                 ~Texture2D();

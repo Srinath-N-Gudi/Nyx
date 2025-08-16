@@ -2,6 +2,7 @@
 
 #ifdef NYX_USE_GLAD
 #include <glad/glad.h>
+#include "../../NyxAPI.h"
 #elif defined(NYX_USE_GLEW)
 #include <GL/glew.h>
 #else
@@ -17,7 +18,7 @@ namespace Nyx {
     namespace Renderer {
         namespace GL {
 
-            class Renderer {
+            class NYX_API Renderer {
             public:
                 using DrawCallback = std::function<void(int index, VAO* vao, void* userData, bool& skipDraw)>;
 

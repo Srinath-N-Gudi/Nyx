@@ -6,6 +6,7 @@
 
 #ifdef NYX_USE_GLAD
 #include <glad/glad.h>
+#include "../../NyxAPI.h"
 #elif defined(NYX_USE_GLEW)
 #include <GL/glew.h>
 #else
@@ -19,7 +20,7 @@ namespace Nyx
 	{
 		namespace GL
 		{
-			struct VertexAttribute {
+			struct NYX_API VertexAttribute {
 				GLuint index;       // location in shader
 				GLint size;         // number of components (e.g. 3 for vec3)
 				GLenum type;        // GL_FLOAT, etc.
@@ -30,7 +31,7 @@ namespace Nyx
 
 
 
-			class VAO
+			class NYX_API VAO
 			{
 			private:
 				GLuint m_VAO; 

@@ -3,6 +3,7 @@
 
 #ifdef NYX_USE_GLAD
 #include <glad/glad.h>
+#include "../../NyxAPI.h"
 #elif defined(NYX_USE_GLEW)
 #include <GL/glew.h>
 #else
@@ -19,7 +20,7 @@ namespace Nyx {
     namespace Renderer {
         namespace GL {
 
-            class Shader {
+            class NYX_API Shader {
             public:
                 Shader(const std::string& vertexPath, const std::string& fragmentPath);
                 ~Shader();

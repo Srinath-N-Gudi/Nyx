@@ -3,6 +3,7 @@
 
 #ifdef NYX_USE_GLAD
 #include <glad/glad.h>
+#include "../../NyxAPI.h"
 #elif defined(NYX_USE_GLEW)
 #include <GL/glew.h>
 #else
@@ -14,7 +15,7 @@ namespace Nyx{
     namespace Renderer
     { 
         namespace GL {
-    class IBO {
+    class NYX_API IBO {
     public:
         IBO();
         ~IBO();

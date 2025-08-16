@@ -2,6 +2,7 @@
 
 #ifdef NYX_USE_GLAD
 #include <glad/glad.h>
+#include "../../NyxAPI.h"
 #elif defined(NYX_USE_GLEW)
 #include <GL/glew.h>
 #else
@@ -16,7 +17,7 @@ namespace Nyx
 		namespace GL
 		{
 		
-			class VBO
+			class NYX_API VBO
 			{
 			private:
 				GLuint m_VBO;

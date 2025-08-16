@@ -1,9 +1,9 @@
 #pragma once
 #include <GLFW/glfw3.h>
-
+#include "../NyxAPI.h"
 namespace Nyx {
 
-    class InputHandler {
+    class NYX_API InputHandler {
     public:
         InputHandler(GLFWwindow* window);
 

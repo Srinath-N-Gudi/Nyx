@@ -14,13 +14,14 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
 #include <functional>
+#include "NyxAPI.h"
 #include "Input/InputHandler.h"
 
 namespace Nyx
 {
 	namespace Window
 	{
-		struct WindowConfig {
+		struct NYX_API WindowConfig {
 			int glMajorVersion = 3;
 			int glMinorVersion = 3;
 			bool coreProfile = true;
@@ -32,7 +33,7 @@ namespace Nyx
 		using NyxResizeCallback = std::function<void(int width, int height)>;
 		using NyxCursorPosCallback = std::function<void(double x, double y)>;
 
-		class  Window
+		class NYX_API Window
 		{
 		private:
 			int m_Width, m_Height;
