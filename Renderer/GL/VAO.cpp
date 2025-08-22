@@ -7,7 +7,8 @@ namespace Nyx
 	{
 		namespace GL
 		{
-			VAO::VAO()
+			VAO::VAO(size_t totalVertices)
+				: m_TotalVertices(totalVertices)
 			{
 				glGenVertexArrays(1, &m_VAO);
 			}

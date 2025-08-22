@@ -19,10 +19,10 @@ namespace Nyx {
 
                     vao->bind();
                     if (vao->hasIBO()) {
-                        glDrawElements(m_DrawMode, vao->getIBO()->getCount(), GL_UNSIGNED_INT, nullptr);
+                        glDrawElements(m_DrawMode, vao->getTotalVertices(), GL_UNSIGNED_INT, nullptr);
                     }
                     else {
-                        glDrawArrays(m_DrawMode, 0, (vao->getVBO(0))->getCount());
+                        glDrawArrays(m_DrawMode, 0, vao->getTotalVertices());
                     }
                 }
             }
@@ -36,10 +36,10 @@ namespace Nyx {
                     if (skipDraw) continue;
                     vao->bind();
                     if (vao->hasIBO()) {
-                        glDrawElements(m_DrawMode, vao->getIBO()->getCount(), GL_UNSIGNED_INT, nullptr);
+                        glDrawElements(m_DrawMode, vao->getTotalVertices(), GL_UNSIGNED_INT, nullptr);
                     }
                     else {
-                        glDrawArrays(m_DrawMode, 0, (vao->getVBO(0))->getCount()); // Assuming all the Layouts are filled uniformly
+                        glDrawArrays(m_DrawMode, 0, (vao->getTotalVertices())); // Assuming all the Layouts are filled uniformly
                     }
                 }
             }

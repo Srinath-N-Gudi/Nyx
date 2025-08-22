@@ -16,10 +16,9 @@ namespace Nyx
 			{
 				glDeleteBuffers(1, &m_VBO);
 			}
-			void VBO::data(const void* data, GLsizeiptr size,GLsizeiptr vertexSize , GLenum usage)
+			void VBO::data(const void* data, GLsizeiptr size , GLenum usage)
 			{
 				this->bind();
-				m_TCount = size / vertexSize;
 				glBufferData(GL_ARRAY_BUFFER, size, data, usage);
 				this->unbind();
 			}

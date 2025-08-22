@@ -39,8 +39,9 @@ namespace Nyx
 				std::vector<VBO*> m_VBO;
 				IBO* m_IBO;
 				bool m_HIBO = false;
+				size_t m_TotalVertices;
 			public:
-				VAO();
+				VAO(size_t totalVertices);
 				~VAO();
 
 				IBO* getIBO();
@@ -52,6 +53,7 @@ namespace Nyx
 				inline GLuint getID() { return m_VAO; }
 				inline bool hasIBO() { return m_HIBO;  }
 				inline VBO* getVBO(GLuint index) { return m_VBO[index]; }
+				inline size_t getTotalVertices() const { return m_TotalVertices; }
 			
 			};
 
