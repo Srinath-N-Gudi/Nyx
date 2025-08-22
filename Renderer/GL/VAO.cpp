@@ -7,8 +7,7 @@ namespace Nyx
 	{
 		namespace GL
 		{
-			VAO::VAO(VBO* vbo) :
-				m_VBO(vbo)
+			VAO::VAO()
 			{
 				glGenVertexArrays(1, &m_VAO);
 			}
@@ -24,12 +23,16 @@ namespace Nyx
 			{
 				glBindVertexArray(0);
 			}
+			void VAO::addVBO(VBO* vbo)
+			{
+				m_VBO.push_back(vbo);
+			}
 			void VAO::setLayout(const std::vector<VertexAttribute>& layout)
 			{
 				this->bind(); 
-				m_VBO->bind();
 
 				for (const auto& attr : layout) {
+					(m_VBO[attr.vboIndex])->bind();
 					glEnableVertexAttribArray(attr.index);
 					glVertexAttribPointer(
 						attr.index,
@@ -39,9 +42,9 @@ namespace Nyx
 						attr.stride,
 						reinterpret_cast<const void*>(attr.offset)
 					);
+					(m_VBO[attr.vboIndex])->unbind();
 				}
 
-				m_VBO->unbind();
 				this->unbind();
 			}
 			void VAO::attachIndexBuffer(IBO* ibo)

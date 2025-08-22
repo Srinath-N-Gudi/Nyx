@@ -22,27 +22,27 @@ namespace Nyx {
                         glDrawElements(m_DrawMode, vao->getIBO()->getCount(), GL_UNSIGNED_INT, nullptr);
                     }
                     else {
-                        glDrawArrays(m_DrawMode, 0, vao->getVBO()->getCount());
+                        glDrawArrays(m_DrawMode, 0, (vao->getVBO(0))->getCount());
                     }
                 }
             }
-			void Renderer::draw(std::shared_ptr<VAO>* vaos, size_t vaoCount, DrawCallback callback, void* userData) {
-				for (size_t i = 0; i < vaoCount; ++i) {
-					std::shared_ptr<VAO> vao = vaos[i];
-					bool skipDraw = false;
-					if (callback) {
-						callback(static_cast<int>(i), vao.get(), m_UserData, skipDraw);
-					}
-					if (skipDraw) continue;
-					vao->bind();
-					if (vao->hasIBO()) {
-						glDrawElements(m_DrawMode, vao->getIBO()->getCount(), GL_UNSIGNED_INT, nullptr);
-					}
-					else {
-						glDrawArrays(m_DrawMode, 0, vao->getVBO()->getCount());
-					}
-				}
-			}
+            void Renderer::draw(std::shared_ptr<VAO>* vaos, size_t vaoCount, DrawCallback callback, void* userData) {
+                for (size_t i = 0; i < vaoCount; ++i) {
+                    std::shared_ptr<VAO> vao = vaos[i];
+                    bool skipDraw = false;
+                    if (callback) {
+                        callback(static_cast<int>(i), vao.get(), m_UserData, skipDraw);
+                    }
+                    if (skipDraw) continue;
+                    vao->bind();
+                    if (vao->hasIBO()) {
+                        glDrawElements(m_DrawMode, vao->getIBO()->getCount(), GL_UNSIGNED_INT, nullptr);
+                    }
+                    else {
+                        glDrawArrays(m_DrawMode, 0, (vao->getVBO(0))->getCount()); // Assuming all the Layouts are filled uniformly
+                    }
+                }
+            }
         } // namespace GL
     } // namespace Renderer
 } // namespace Nyx

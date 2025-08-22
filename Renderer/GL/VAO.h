@@ -27,6 +27,7 @@ namespace Nyx
 				GLboolean normalized;
 				GLsizei stride;     // full vertex size
 				size_t offset;      // offset to this attribute
+				GLuint vboIndex=0;
 			};
 
 
@@ -35,22 +36,22 @@ namespace Nyx
 			{
 			private:
 				GLuint m_VAO; 
-				VBO* m_VBO;
+				std::vector<VBO*> m_VBO;
 				IBO* m_IBO;
 				bool m_HIBO = false;
 			public:
-				VAO(VBO* vbo);
+				VAO();
 				~VAO();
 
 				IBO* getIBO();
-
+				void addVBO(VBO* vbo);
 				void bind() const;
 				void unbind() const;
 				void setLayout(const std::vector<VertexAttribute>& layout);
 				void attachIndexBuffer(IBO* ibo);
 				inline GLuint getID() { return m_VAO; }
 				inline bool hasIBO() { return m_HIBO;  }
-				inline VBO* getVBO() { return m_VBO; }
+				inline VBO* getVBO(GLuint index) { return m_VBO[index]; }
 			
 			};
 
