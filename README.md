@@ -692,4 +692,8 @@ int main()
 ## 📜 License
 
 Nyx is released under the MIT License.
-Includes `stb_image.h` by Sean Barrett (Public Domain / MIT).
+
+Uses stb_image.h (Public Domain / MIT).
+Uses Assimp (BSD-3-Clause).
+
+All third-party licenses are in vendor/LICENSES.
