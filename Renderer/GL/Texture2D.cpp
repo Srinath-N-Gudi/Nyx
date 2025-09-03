@@ -23,17 +23,20 @@ namespace Nyx {
             void Texture2D::setData(int width, int height, int channels, const void* data, const TextureParams& params) {
                 GLenum format = GL_RGB;
                 if (channels == 4) format = GL_RGBA;
+                glBindTexture(GL_TEXTURE_2D, m_TextureID);
                 glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
                 glGenerateMipmap(GL_TEXTURE_2D);
             }
 
-            void Texture2D::bind(unsigned int slot){
+            void Texture2D::setActivateTexture(unsigned int slot) {
                 glActiveTexture(GL_TEXTURE0 + slot);
+                glBindTexture(GL_TEXTURE_2D, m_TextureID);
+            }            
+            void Texture2D::bind(){
                 glBindTexture(GL_TEXTURE_2D, m_TextureID);
             }
 
-            void Texture2D::unbind(unsigned int slot) {
-                glActiveTexture(GL_TEXTURE0 + slot);
+            void Texture2D::unbind() {
                 glBindTexture(GL_TEXTURE_2D, 0);
             }
 

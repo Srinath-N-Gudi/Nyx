@@ -30,12 +30,11 @@ namespace Nyx {
 
                 // Upload pixel data to GPU (expects raw RGBA/RGB data)
                 void setTextureParams(const TextureParams& params = {});
-                void setData(int width, int height, const void* data);
-                void setData(int width, int height, int channels, const void* data, const TextureParams& params = {});
-
+                void setData(int width, int height, int channels, const void* data);
                 // Bind to a texture unit (GL_TEXTURE0 + slot)
-                void bind(unsigned int slot);
-                static void unbind(unsigned int slot);
+                void bind();
+                void unbind();
+                void setActivateTexture(unsigned int slot);
 
                 // Get OpenGL texture ID (if needed externally)
                 GLuint id() const { return m_TextureID; }
