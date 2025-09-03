@@ -34,7 +34,7 @@ namespace Nyx {
                 // Bind to a texture unit (GL_TEXTURE0 + slot)
                 void bind();
                 void unbind();
-                void setActivateTexture(unsigned int slot);
+                void ActivateTextureAtSlot(unsigned int slot);
 
                 // Get OpenGL texture ID (if needed externally)
                 GLuint id() const { return m_TextureID; }

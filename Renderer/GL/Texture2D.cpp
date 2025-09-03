@@ -20,7 +20,7 @@ namespace Nyx {
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, params.minFilter);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, params.magFilter);
             }
-            void Texture2D::setData(int width, int height, int channels, const void* data, const TextureParams& params) {
+            void Texture2D::setData(int width, int height, int channels, const void* data) {
                 GLenum format = GL_RGB;
                 if (channels == 4) format = GL_RGBA;
                 glBindTexture(GL_TEXTURE_2D, m_TextureID);
@@ -28,7 +28,7 @@ namespace Nyx {
                 glGenerateMipmap(GL_TEXTURE_2D);
             }
 
-            void Texture2D::setActivateTexture(unsigned int slot) {
+            void Texture2D::ActivateTextureAtSlot(unsigned int slot) {
                 glActiveTexture(GL_TEXTURE0 + slot);
                 glBindTexture(GL_TEXTURE_2D, m_TextureID);
             }            
