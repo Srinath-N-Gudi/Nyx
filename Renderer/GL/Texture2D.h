@@ -29,7 +29,7 @@ namespace Nyx {
                 ~Texture2D();
 
                 // Upload pixel data to GPU (expects raw RGBA/RGB data)
-                void setTextureParams(const TextureParams& params);
+                void setTextureParams(const TextureParams& params = {});
                 void setData(int width, int height, const void* data);
                 void setData(int width, int height, int channels, const void* data, const TextureParams& params = {});
 
