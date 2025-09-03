@@ -25,22 +25,22 @@ namespace Nyx {
 
             class NYX_API Texture2D {
             public:
-                Texture2D(unsigned int slot=0);
+                Texture2D();
                 ~Texture2D();
 
                 // Upload pixel data to GPU (expects raw RGBA/RGB data)
+                void setTextureParams(const TextureParams& params);
+                void setData(int width, int height, const void* data);
                 void setData(int width, int height, int channels, const void* data, const TextureParams& params = {});
 
                 // Bind to a texture unit (GL_TEXTURE0 + slot)
-                void bind();
-                void unbind() const;
+                void bind(unsigned int slot);
+                static void unbind(unsigned int slot);
 
                 // Get OpenGL texture ID (if needed externally)
                 GLuint id() const { return m_TextureID; }
-                inline unsigned int getSlot() const { return m_Slot; }
             private:
                 GLuint m_TextureID = 0;
-                unsigned int m_Slot = 0;
             };
 
         }

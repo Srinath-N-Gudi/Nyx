@@ -14,7 +14,6 @@ namespace Nyx {
                     return false;
                 }
 
-                texture.bind();
                 texture.setData(width, height, channels, data);
                 stbi_image_free(data);
                 return true;
