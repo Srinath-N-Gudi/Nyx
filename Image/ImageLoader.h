@@ -11,7 +11,7 @@ namespace Nyx {
         class NYX_API Loader {
         public:
             static bool LoadToTexture(Nyx::Renderer::GL::Texture2D& texture,
-                                      const std::string& path
+                                      const std::string& path, bool flip = true
 				);
         };
     }
